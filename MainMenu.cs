@@ -10,7 +10,10 @@ namespace ConsoleGame_Pexeso
     {
         public enum MenuStates
         {
-            ClassicGame = 0, CustomGame = 1, HowToPlay = 2, End = 3
+            ClassicGame = 0,
+            CustomGame = 1,
+            HowToPlay = 2,
+            End = 3
         }
 
         public static int ShowMainMenu()
@@ -26,9 +29,9 @@ namespace ConsoleGame_Pexeso
             while (!selectionFinished)
             {
                 Console.SetCursorPosition(0, 3);
-                enumLenght = Enum.GetNames(typeof(MenuStates)).Length;
+                enumLenght = Enum.GetNames(typeof(MenuStates)).Length; //Enum.GetNames(typeof(ManuStates)).Length return number of names is enum
 
-                for (int i = 0; i < enumLenght; i++)  //Enum.GetNames(typeof(ManuStates)).Length return number of names is enum
+                for (int i = 0; i < enumLenght; i++)  
                 {
                     if (selectedItem == i)
                         Console.BackgroundColor = ConsoleColor.Blue;
@@ -39,16 +42,16 @@ namespace ConsoleGame_Pexeso
 
                 PressedKey = Console.ReadKey(true); //when true => character wont show up in console
 
-                if (PressedKey.Key == ConsoleKey.DownArrow && selectedItem < enumLenght - 1)
+                if (PressedKey.Key == ConsoleKey.DownArrow && selectedItem < enumLenght - 1) //setup a limit so you cannot go out of selection menu
                     selectedItem++;
 
-                else if (PressedKey.Key == ConsoleKey.UpArrow && selectedItem > 0)
+                else if (PressedKey.Key == ConsoleKey.UpArrow && selectedItem > 0) //setup a limit so you cannot go out of selection menu
                     selectedItem--;
 
-                else if (PressedKey.Key == ConsoleKey.Enter)
+                else if (PressedKey.Key == ConsoleKey.Enter) //confirm your selection
                     selectionFinished = true;
             }
-            return selectedItem;
+            return selectedItem; //return selected item id
         }
 
         public static void Instructions()
