@@ -11,6 +11,7 @@ namespace ConsoleGame_Pexeso
         static GameWorld gameworld;
         static void Main(string[] args)
         {
+            Start:
             switch ((MainMenu.MenuStates)MainMenu.ShowMainMenu()) //MainMenu.ShowMainMenu() returns id of selected item that is instantly translated to string value of that id.
             {
                 case MainMenu.MenuStates.ClassicGame: //ClassicGame has id 0;
@@ -20,14 +21,26 @@ namespace ConsoleGame_Pexeso
                     break;
 
                 case MainMenu.MenuStates.CustomGame: //ClassicGame has id 1;
+                    Console.Clear();
+                    int input;
+                    Console.WriteLine("Select the size of game square field (min=2, max=7): ");
+                    while (!int.TryParse(Console.ReadLine(), out input))
+                        Console.WriteLine("Invalid input!");
 
+                    if (input > 7)
+                        input = 7;
+
+                    else if (input <= 1)
+                        input = 2;
+
+                    gameworld = new GameWorld(input);
                     break;
 
                 case MainMenu.MenuStates.HowToPlay: //ClassicGame has id 2;
                     Console.Clear();
                     MainMenu.Instructions();
                     Console.ReadKey(true);
-                    break;
+                    goto Start; //not ideal solution :D but hey it works.
 
                 case MainMenu.MenuStates.End: //ClassicGame has id 3;
                     System.Environment.Exit(0);
@@ -72,6 +85,11 @@ namespace ConsoleGame_Pexeso
 
             Console.WriteLine("You won!");
             Console.ReadKey(true);
+        }
+
+        private static int InputChecker(string input)
+        {
+            return 1;
         }
     }
 }

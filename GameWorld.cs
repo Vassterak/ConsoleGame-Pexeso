@@ -40,6 +40,7 @@ namespace ConsoleGame_Pexeso
         int revealedCards = 0;
         int numOfMoves = 0;
         int sizeOfField = 4; // square, so 4*4 = 16 cards
+
         char cardSkin = '#'; //this represents the visual style of card which is hidden(not visible)
 
 
@@ -49,6 +50,14 @@ namespace ConsoleGame_Pexeso
 
         public GameWorld()
         {
+            gameMap = new char[sizeOfField, sizeOfField]; //contains values of cards
+            cardstate = new CardState[sizeOfField, sizeOfField]; //contains states of the cards
+            DealTheCards();
+        }
+
+        public GameWorld(int sizeOfField)
+        {
+            this.sizeOfField = sizeOfField;
             gameMap = new char[sizeOfField, sizeOfField]; //contains values of cards
             cardstate = new CardState[sizeOfField, sizeOfField]; //contains states of the cards
             DealTheCards();
