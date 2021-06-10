@@ -37,20 +37,41 @@ namespace ConsoleGame_Pexeso
             while (!gameworld.AllShown())
             {
                 gameworld.RenderMap();
+                //----------------------First card-------
                 int x = -1, y = -1;
-
                 do
                 {
-                    Console.Write("Enter the X(pos. in row, starts from 1) coordinaties of your card: ");
-                    x = int.Parse(Console.ReadLine());
-                    Console.Write("Enter the Y(pos in collum, starts from 1) coordinaties of your card: ");
-                    y = int.Parse(Console.ReadLine());
+                    Console.Write("Enter the X(pos. in row, starts from 1) coordinaties of your FIRST card: ");
+                    x = -1 + int.Parse(Console.ReadLine());
+                    Console.Write("Enter the Y(pos in collum, starts from 1) coordinaties of your FIRST card: ");
+                    y = -1 + int.Parse(Console.ReadLine());
 
                     if (!gameworld.CardValidityChecker(x, y)) //if y make a typo....                                  ←
                         Console.WriteLine("The coordinates which you entered are not valid! Please try it again.");
 
                 } while (!gameworld.CardValidityChecker(x, y)); //same here. It was easier to make an extra condition ↑ to write down the error.
+                
+                gameworld.FlipFirstCard(x, y);
+
+                //----------------------Second card-------
+                x = -1; y = -1;
+                do
+                {
+                    Console.Write("Enter the X(pos. in row, starts from 1) coordinaties of your SECOND card: ");
+                    x = -1 + int.Parse(Console.ReadLine());
+                    Console.Write("Enter the Y(pos in collum, starts from 1) coordinaties of your SECOND card: ");
+                    y = -1 + int.Parse(Console.ReadLine());
+
+                    if (!gameworld.CardValidityChecker(x, y)) //if y make a typo....                                  ←
+                        Console.WriteLine("The coordinates which you entered are not valid! Please try it again.");
+
+                } while (!gameworld.CardValidityChecker(x, y)); //same here. It was easier to make an extra condition ↑ to write down the error.
+
+                gameworld.FlipSecondCard(x, y);
             }
+
+            Console.WriteLine("You won!");
+            Console.ReadKey(true);
         }
     }
 }

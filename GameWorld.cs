@@ -137,5 +137,25 @@ namespace ConsoleGame_Pexeso
 
 
         }
+
+        public void FlipSecondCard(int x, int y)
+        {
+            cardstate[x, y] = CardState.Shown;
+            numOfMoves++;
+            RenderMap();
+            Console.ReadKey(true);
+
+            if (gameMap[flippedCard.X, flippedCard.Y] == gameMap[x,y]) //flipcard is representing the first one
+            {
+                cardstate[flippedCard.X, flippedCard.Y] = CardState.Deleted; //when condition is true, then we "delete" both cards.
+                cardstate[x, y] = CardState.Deleted;
+                revealedCards += 2;
+            }
+            else
+            {
+                cardstate[flippedCard.X, flippedCard.Y] = CardState.Hidden;
+                cardstate[x, y] = CardState.Hidden;
+            }
+        }
     }
 }
