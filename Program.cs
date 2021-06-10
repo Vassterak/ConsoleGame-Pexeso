@@ -55,9 +55,14 @@ namespace ConsoleGame_Pexeso
                 do
                 {
                     Console.Write("Enter the X(pos. in row, starts from 1) coordinaties of your FIRST card: ");
-                    x = -1 + int.Parse(Console.ReadLine());
+                    while (!int.TryParse(Console.ReadLine(), out x))
+                        Console.WriteLine("Invalid input!");
+                    x += -1;
+
                     Console.Write("Enter the Y(pos in collum, starts from 1) coordinaties of your FIRST card: ");
-                    y = -1 + int.Parse(Console.ReadLine());
+                    while (!int.TryParse(Console.ReadLine(), out y))
+                        Console.WriteLine("Invalid input!");
+                    y += -1;
 
                     if (!gameworld.CardValidityChecker(x, y)) //if y make a typo....                                  ←
                         Console.WriteLine("The coordinates which you entered are not valid! Please try it again.");
@@ -85,11 +90,6 @@ namespace ConsoleGame_Pexeso
 
             Console.WriteLine("You won!");
             Console.ReadKey(true);
-        }
-
-        private static int InputChecker(string input)
-        {
-            return 1;
         }
     }
 }
