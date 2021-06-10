@@ -52,7 +52,6 @@ namespace ConsoleGame_Pexeso
             gameMap = new char[sizeOfField, sizeOfField]; //contains values of cards
             cardstate = new CardState[sizeOfField, sizeOfField]; //contains states of the cards
             DealTheCards();
-            RenderMap();
         }
 
         private void DealTheCards() //cze: rozdat karty
@@ -119,5 +118,24 @@ namespace ConsoleGame_Pexeso
             }
         }
 
+        public bool AllShown() //check if all cards are revealed
+        {
+            return revealedCards == sizeOfField * sizeOfField;
+        }
+
+        public bool CardValidityChecker(int x, int y) //check if coordinaties of card are valid and if they are check also if the card is not already guessed or flipped
+        {
+            return (x >= 0 && x <sizeOfField) && (y >= 0 && y < sizeOfField) && (cardstate[x,y] == CardState.Hidden);
+        }
+
+        public void FlipFirstCard(int x, int y)
+        {
+            flippedCard = new Position(x, y); //for remembering the first flipped card
+            cardstate[x, y] = CardState.Shown;
+            numOfMoves++;
+            RenderMap(); //gameWorld update to see the change
+
+
+        }
     }
 }
